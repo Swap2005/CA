@@ -16,7 +16,7 @@ body{
   z-index:2000;
 }
 
-/* HERO FIX */
+/* --- HERO SECTION WITH ANIMATED BACKGROUND --- */
 .hero{
   min-height:100vh;
   padding-top:80px;
@@ -25,7 +25,34 @@ body{
   justify-content:center;
   align-items:center;
   text-align:center;
-  background:linear-gradient(135deg,#0a1f44,#162f63);
+  /* Updated to animated gradient */
+  background: linear-gradient(-45deg, #0a1f44, #162f63, #0b1220, #1a3a7a);
+  background-size: 400% 400%;
+  animation: gradientBG 15s ease infinite;
+}
+
+@keyframes gradientBG {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* --- ENTRY ANIMATIONS --- */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes buttonPulse {
+  0% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0.4); }
+  70% { box-shadow: 0 0 0 15px rgba(212, 175, 55, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(212, 175, 55, 0); }
 }
 
 /* CONTACT FIX */
@@ -51,7 +78,7 @@ nav{
   position:fixed;
   width:100%;
   z-index:1000;
-  box-sizing: border-box;
+  box-sizing: border-box; /* Fix for contact link */
 }
 
 .logo{
@@ -155,7 +182,7 @@ nav{
   font-size:11px;
   border-radius:20px;
   font-weight:bold;
-  z-index:2; /* keeps it above but inside */
+  z-index:2; 
 }
 
 /* FIX POSITIONING */
@@ -163,14 +190,11 @@ nav{
   position:relative;
 }
 
-
-
 /* Hover effect for interactivity */
 .about-img:hover {
   transform: scale(1.05);
   box-shadow: 0 0 20px rgba(212,175,55,0.6);
 }
-
 
 /* NAV LINKS */
 .nav-links{
@@ -232,14 +256,17 @@ nav{
   background:#1c2d4d;
 }
 
-/* HERO TEXT */
+/* HERO TEXT ANIMATIONS */
 .hero h1{
   font-family:'Playfair Display',serif;
   font-size:52px;
+  animation: fadeInUp 1s ease-out forwards;
 }
 
 .hero p{
   color:#bbb;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.3s forwards;
 }
 
 /* BUTTONS */
@@ -252,10 +279,14 @@ nav{
   color:black;
   cursor:pointer;
   transition:0.3s;
+  opacity: 0;
+  /* Pulsing animation + fadeInUp */
+  animation: fadeInUp 1s ease-out 0.6s forwards, buttonPulse 2s infinite 1.6s;
 }
 
 .btn:hover{
   box-shadow:0 0 20px #d4af37;
+  transform: scale(1.05);
 }
 
 .btn-outline{
@@ -264,6 +295,8 @@ nav{
   border-radius:30px;
   color:white;
   text-decoration:none;
+  opacity: 0;
+  animation: fadeInUp 1s ease-out 0.6s forwards;
 }
 
 /* CONTAINER */
@@ -392,6 +425,7 @@ h2{
   border-radius:50%;
   font-size:22px;
   color:white;
+  z-index: 1000;
 }
 
 /* LOADER */
@@ -415,6 +449,25 @@ h2{
   animation:spin 1s linear infinite;
 }
 
+/* RESPONSIVE NAV */
+@media (max-width: 600px) {
+  nav {
+    padding: 12px 20px;
+  }
+  
+  .nav-links {
+    gap: 15px;
+  }
+
+  .logo {
+    font-size: 12px;
+  }
+  
+  .hero h1 {
+    font-size: 36px;
+  }
+}
+
 @keyframes spin{
   100%{transform:rotate(360deg);}
 }
@@ -429,8 +482,6 @@ h2{
   opacity:1;
   transform:translateY(0);
 }
-
-
 
 .social-icons{
   display:flex;
@@ -450,7 +501,6 @@ h2{
   transform:scale(1.1);
 }
 
-
 .why-us{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
@@ -468,8 +518,6 @@ h2{
   transform:translateY(-5px);
   border:1px solid #d4af37;
 }
-
-
 
 .footer{
   background:#0a1f44;
@@ -501,7 +549,6 @@ h2{
   color:#aaa;
 }
 
-
 .youtube-section{
   display:grid;
   grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
@@ -513,7 +560,6 @@ h2{
   height:200px;
   border-radius:10px;
 }
-
 
 .faq-item{
   background:rgba(255,255,255,0.04);
